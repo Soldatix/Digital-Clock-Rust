@@ -1,8 +1,8 @@
-# Digital Clock Rust Portable
+# Digital Clock Windows Portable
 
 Izvorni kod za **Windows x64 Portable** digitalni sat izrađen u jeziku **Rust** s grafičkim sučeljem **Slint**. Za prikaz sučelja ne koristi .NET ni WebView2.
 
-**Trenutačno stanje:** v0.3.8 · RC3.2 kandidat za izdanje. Ovo je zasebna Rust verzija i ne zamjenjuje postojeću .NET ili Android aplikaciju.
+**Stabilno izdanje:** v0.3.8. Windows Portable aplikacija izrađena je u Rustu i Slintu; Android i Microsoft Store verzije zasebna su izdanja.
 
 ## Funkcije
 
@@ -14,7 +14,7 @@ Izvorni kod za **Windows x64 Portable** digitalni sat izrađen u jeziku **Rust**
 
 ## Preuzimanje i pokretanje
 
-Službeni Windows ZIP bit će dodan u GitHub Release **tek nakon završnog odobrenja objave**. Trenutačno repozitorij sadrži **izvorni kod**, a ne objavljeni instalacijski paket.
+Gotov Windows Portable ZIP dostupan je u [GitHub izdanju v0.3.8](https://github.com/Soldatix/Digital-Clock-Rust/releases/tag/v0.3.8). Ovaj repozitorij sadrži izvorni kod; GitHub izdanje sadrži datoteke za pokretanje.
 
 Kad izdanje bude dostupno, raspakiraj cijeli ZIP u mapu i pokreni `digital-clock-rust-portable.exe`. Microsoftove DLL datoteke priložene u paketu moraju ostati pokraj EXE datoteke. Postavke i backup spremaju se lokalno u `Data/`.
 
@@ -27,7 +27,7 @@ cargo test --locked
 cargo build --release --locked
 ```
 
-Ovaj izvorni paket čuva **neizmijenjene Cargo.toml, Cargo.lock, Rust datoteke, ikone i fontove** iz provjerenog RC3.2 arhiva. Cargo verzija aplikacije je `0.3.8`. Funkcionalni testovi na Windowsu prethodno su provedeni; **ne tvrdimo** da je kompilacija bajtno reproducibilna.
+Stabilno izdanje v0.3.8 temelji se na testiranom RC3.2 kodu. Rust izvorne datoteke, `Cargo.toml`, `Cargo.lock`, ikone i fontovi ostali su **neizmijenjeni**. Verzija u Cargo paketu je `0.3.8`. **Ne tvrdimo** da je kompilacija bajtno reproducibilna.
 
 ## Licence
 
