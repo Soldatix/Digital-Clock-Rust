@@ -1,8 +1,8 @@
-# Digital Clock Rust Portable
+# Digital Clock Windows Portable
 
 Native **Windows x64 portable** desktop digital clock built with **Rust** and **Slint** (no .NET or WebView2 UI dependency).
 
-**Current source:** v0.3.8 · RC3.2 release candidate. The standalone Rust edition is distinct from the existing Digital Clock .NET and Android editions.
+**Stable release:** v0.3.8. This Windows Portable edition uses Rust and Slint; the Android and Microsoft Store editions are separate.
 
 ## Features
 
@@ -14,7 +14,7 @@ Native **Windows x64 portable** desktop digital clock built with **Rust** and **
 
 ## Download and usage
 
-The official Windows ZIP will be attached to a GitHub Release **only after final release approval**. This repository currently contains **source code**, not an installer or a published binary.
+Download the current Windows Portable ZIP from the [v0.3.8 release](https://github.com/Soldatix/Digital-Clock-Rust/releases/tag/v0.3.8). This repository contains the source code; the GitHub release contains the ready-to-run Windows ZIP.
 
 When a release becomes available, extract the full ZIP to a folder and start `digital-clock-rust-portable.exe`. Keep bundled runtime DLLs beside the EXE. User settings and backups are stored alongside the portable app under `Data/`; do not run it directly from the ZIP.
 
@@ -27,7 +27,7 @@ cargo test --locked
 cargo build --release --locked
 ```
 
-This source snapshot retains the exact reviewed **Cargo.toml, Cargo.lock, Rust sources, icons, and fonts** from the RC3.2 review archive. Its Rust package version is `0.3.8`. It was built and functionally checked on Windows prior to this repository snapshot, but byte-identical reproducible builds are **not claimed**.
+The stable v0.3.8 release promotes the functionally tested RC3.2 code without modifying the Rust source, `Cargo.toml`, `Cargo.lock`, icons or fonts. The package version is `0.3.8`. Byte-identical reproducible builds are **not claimed**.
 
 ## Licensing and attribution
 
@@ -40,4 +40,4 @@ See [SOURCE-PROVENANCE.md](SOURCE-PROVENANCE.md) for checksums and the scope of 
 
 ## Project
 
-[Apps & Games](https://appsandgames.org/) · Digital Clock Rust Portable · [Source repository](https://github.com/Soldatix/Digital-Clock-Rust)
+[Apps & Games](https://appsandgames.org/) · Digital Clock Windows Portable · [Source repository](https://github.com/Soldatix/Digital-Clock-Rust)
