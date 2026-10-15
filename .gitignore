@@ -1,0 +1,28 @@
+# Rust build outputs
+/target/
+**/target/
+*.pdb
+*.ilk
+
+# Portable user state: never commit personal settings or backups
+/Data/
+**/Data/
+*.bak
+
+# Editor and OS state
+.vs/
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local-only scratch, archives and reports
+*.log
+*.tmp
+*.zip
+*.7z
+*.msix
+*.msixbundle

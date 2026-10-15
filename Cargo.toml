@@ -1,0 +1,21 @@
+[package]
+name = "digital-clock-rust-portable"
+version = "0.3.8"
+edition = "2024"
+license = "MIT"
+description = "Isolated P2.8 full localization and accessible display controls candidate"
+publish = false
+
+[dependencies]
+slint = { version = "=1.18.1", default-features = false, features = ["compat-1-18", "std", "backend-winit", "renderer-femtovg", "accessibility"] }
+chrono = { version = "0.4.42", default-features = false, features = ["std", "clock"] }
+chrono-tz = "=0.10.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
