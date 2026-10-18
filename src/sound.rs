@@ -78,6 +78,37 @@ impl SoundEngine {
         });
     }
 
+    #[cfg(all(windows, feature = "windows-installer"))]
+    fn custom(&self, tone: AlarmTone, file: Option<String>, repeat: bool, max_duration: Duration) {
+        let Some(file) = file else { self.start(tone, repeat, if repeat { Some(max_duration) } else { None }); return; };
+        self.stop();
+        let active = Arc::new(AtomicBool::new(true));
+        if let Ok(mut current) = self.current.lock() { *current = Some(active.clone()); }
+        std::thread::spawn(move || {
+            let started = Instant::now();
+            let played = crate::windows_custom_audio::play_media(&file, &active, repeat, max_duration);
+            if !played && should_continue(&active, started, Some(max_duration)) {
+                // Device/codec unavailable: never leave an alarm silently muted.
+                loop {
+                    if !should_continue(&active, started, Some(max_duration)) { break; }
+                    pattern(tone, &active);
+                    if !repeat { break; }
+                    responsive_pause(&active, 750, started, Some(max_duration));
+                }
+            }
+            active.store(false, Ordering::Relaxed);
+        });
+    }
+
+    #[cfg(all(windows, feature = "windows-installer"))]
+    pub fn preview_with_file(&self, tone: AlarmTone, file: Option<String>) {
+        self.custom(tone, file, false, Duration::from_secs(15));
+    }
+    #[cfg(all(windows, feature = "windows-installer"))]
+    pub fn play_with_file(&self, tone: AlarmTone, file: Option<String>) {
+        self.custom(tone, file, true, MAX_ALERT_SOUND);
+    }
+
     pub fn preview(&self, tone: AlarmTone) { self.start(tone, false, None); }
     /// Alarm/timer repeats until acknowledged or a five-minute deadline expires.
     pub fn play_until_stopped(&self, tone: AlarmTone) { self.start(tone, true, Some(MAX_ALERT_SOUND)); }

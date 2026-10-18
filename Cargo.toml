@@ -6,6 +6,10 @@ license = "MIT"
 description = "Isolated P2.8 full localization and accessible display controls candidate"
 publish = false
 
+[features]
+default = []
+windows-installer = []
+
 [dependencies]
 slint = { version = "=1.18.1", default-features = false, features = ["compat-1-18", "std", "backend-winit", "renderer-femtovg", "accessibility"] }
 chrono = { version = "0.4.42", default-features = false, features = ["std", "clock"] }

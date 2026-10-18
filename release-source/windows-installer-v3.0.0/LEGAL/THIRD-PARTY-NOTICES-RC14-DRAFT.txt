@@ -1,0 +1,5 @@
+DIGITAL CLOCK RC14: SUPERSEDED NOTICE
+This former draft has been superseded by THIRD-PARTY-NOTICES-RC14-FINAL.txt.
+For the publisher-approved choices, consult LICENSE-CHOICES-RC14-PUBLISHER-APPROVED.csv.
+Do not use older OPEN flags as the publisher-choice status. Final release verification
+remains a separate step.

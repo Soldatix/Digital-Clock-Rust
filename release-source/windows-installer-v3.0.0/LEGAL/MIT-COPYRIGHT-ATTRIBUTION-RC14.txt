@@ -1,0 +1,23 @@
+DIGITAL CLOCK RC14 - SUPPLEMENTAL MIT COPYRIGHT ATTRIBUTION
+
+The following four unmodified upstream MIT license templates contain literal
+<year> and <copyright holders> placeholders. Do not alter or replace the
+original upstream files in THIRD-PARTY-LICENSES.
+
+const-field-offset 0.2.1
+const-field-offset-macro 0.2.1
+vtable 0.5.0
+vtable-macro 0.5.0
+
+Supplemental upstream copyright information:
+Copyright (c) SixtyFPS GmbH <info@slint.dev>
+Source: https://github.com/slint-ui/slint
+SPDX (these four crates): MIT OR Apache-2.0; publisher chooses MIT.
+
+This attribution supplements, and does not modify, the original license
+texts. It is supported by the Slint upstream source header information.
+
+Sources for independent verification:
+https://docs.rs/crate/const-field-offset-macro/0.2.1/source/Cargo.toml.orig
+https://docs.rs/crate/const-field-offset-macro/0.2.1/source/macro.rs
+https://docs.rs/vtable/0.5.0/src/vtable/vrc.rs.html

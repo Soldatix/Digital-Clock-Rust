@@ -52,15 +52,23 @@ mod windows {
     }
 
     pub fn select_json_file(save: bool) -> Result<Option<PathBuf>, String> {
+        select_file(save, false)
+    }
+    pub fn select_audio_file() -> Result<Option<PathBuf>, String> {
+        select_file(false, true)
+    }
+    fn select_file(save: bool, audio: bool) -> Result<Option<PathBuf>, String> {
         // Buffer and UTF-16 strings remain alive until the modal Win32 dialog closes.
         let mut file = [0u16; 32768];
         if save {
             let suggestion = wide("DigitalClock-backup.json");
             file[..suggestion.len()].copy_from_slice(&suggestion);
         }
-        let filter: Vec<u16> = "JSON backup (*.json)\0*.json\0All files (*.*)\0*.*\0\0"
+        let filter: Vec<u16> = (if audio {
+            "Audio files\0*.wav;*.mp3;*.wma;*.m4a;*.aac\0All files\0*.*\0\0"
+        } else { "JSON backup (*.json)\0*.json\0All files (*.*)\0*.*\0\0" })
             .encode_utf16().collect();
-        let title = wide(if save { "Save Digital Clock backup" } else { "Open Digital Clock backup" });
+        let title = wide(if audio { "Select Digital Clock sound" } else if save { "Save Digital Clock backup" } else { "Open Digital Clock backup" });
         let extension = wide("json");
         let mut info = OpenFileNameW {
             struct_size: std::mem::size_of::<OpenFileNameW>() as u32,
@@ -104,7 +112,12 @@ mod windows {
 }
 
 #[cfg(windows)]
-pub use windows::select_json_file;
+pub use windows::{select_json_file, select_audio_file};
+
+#[cfg(not(windows))]
+pub fn select_audio_file() -> Result<Option<PathBuf>, String> {
+    Err("File dialogs require Windows".into())
+}
 
 #[cfg(not(windows))]
 pub fn select_json_file(_save: bool) -> Result<Option<PathBuf>, String> {

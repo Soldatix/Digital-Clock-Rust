@@ -1,6 +1,12 @@
 #![cfg_attr(all(windows, not(debug_assertions)), windows_subsystem = "windows")]
 
 mod config;
+#[cfg(all(windows, feature = "windows-installer"))]
+mod windows_custom_audio;
+#[cfg(all(windows, feature = "windows-installer"))]
+mod windows_tray;
+#[cfg(all(windows, feature = "windows-installer"))]
+mod windows_screensaver;
 #[cfg(windows)]
 mod single_instance;
 mod domain;
@@ -29,6 +35,11 @@ slint::slint! {
     // RC3.1: single keyboard/pointer/accessibility entry point, without changing icon art.
     component AccessibleTap inherits FocusScope {
         in property <string> label;
+        // Delayed property-change focus executes within this component's own scope.
+        in property <int> refocus-request: 0;
+        changed refocus-request => {
+            if (self.refocus-request > 0) { self.focus(); }
+        }
         callback activated();
         accessible-role: button;
         accessible-label: root.label;
@@ -154,6 +165,13 @@ slint::slint! {
         in-out property <string> txt-edit: "Uredi";
         in-out property <string> txt-save-time: "Spremi vrijeme";
         in-out property <string> txt-tone: "Ton alarma";
+        // RC3: separate installer-only audio selection without changing Portable state.
+        in-out property <bool> installed-audio-enabled: false;
+        in-out property <string> custom-alarm-label: "Built-in tone";
+        in-out property <string> custom-timer-label: "Built-in tone";
+        in-out property <string> txt-custom-audio: "Custom audio file";
+        in-out property <string> txt-choose-sound: "Choose file";
+        in-out property <string> txt-reset-sound: "Use built-in";
         in-out property <string> txt-preview: "Isprobaj zvuk";
         in-out property <string> txt-enable: "Uključi";
         in-out property <string> txt-disable: "Isključi";
@@ -222,6 +240,10 @@ slint::slint! {
         in-out property <int> selected-page: 0;
         // Home overlay: 0 = none, 1 = info/feature notice, 2 = appearance settings.
         in-out property <int> home-panel: 0;
+        // Monotonically increasing requests; each Esc requests another refocus.
+        in-out property <int> return-language-focus: 0;
+        in-out property <int> return-info-focus: 0;
+        in-out property <int> return-settings-focus: 0;
         in-out property <string> home-message: "";
         // Editable native appearance; data is kept in a P2.6-only state file.
         in-out property <color> home-background: #2400d0;
@@ -278,6 +300,10 @@ slint::slint! {
         callback toggle-alarm(int);
         callback select-alarm-tone(string);
         callback preview-alarm-tone();
+        callback choose-alarm-audio();
+        callback clear-alarm-audio();
+        callback choose-timer-audio();
+        callback clear-timer-audio();
         callback set-timer(string);
         callback start-pause-timer();
         callback reset-timer();
@@ -307,6 +333,21 @@ slint::slint! {
             capture-key-pressed(event) => {
                 if (event.text == Key.Escape && root.display-mode != 0) {
                     root.exit-display-mode();
+                    return accept;
+                }
+                if (event.text == Key.Escape && root.language-menu) {
+                    root.language-menu = false;
+                    root.return-language-focus += 1;
+                    return accept;
+                }
+                if (event.text == Key.Escape && root.home-panel == 1) {
+                    root.home-panel = 0;
+                    root.return-info-focus += 1;
+                    return accept;
+                }
+                if (event.text == Key.Escape && root.home-panel == 2) {
+                    root.home-panel = 0;
+                    root.return-settings-focus += 1;
                     return accept;
                 }
                 if (event.text == Key.Escape && root.home-panel != 0) {
@@ -441,7 +482,7 @@ Rectangle {
                                 root.language-code == "es" ? @image-url("../assets/flags/es.svg") : @image-url("../assets/flags/en.svg");
                             x: 8px; y: 13px; width: 28px; height: 18px; image-fit: contain;
                         }
-                        AccessibleTap { width: parent.width; height: parent.height; label: root.txt-language; activated => { root.language-menu = !root.language-menu; root.home-panel = 0; } }
+                        language-trigger := AccessibleTap { width: parent.width; height: parent.height; refocus-request: root.return-language-focus; label: root.txt-language; activated => { root.language-menu = !root.language-menu; root.home-panel = 0; } }
                     }
 Rectangle {
                         width: 44px; height: 44px;
@@ -453,7 +494,7 @@ Rectangle {
                             width: 24px; height: 24px;
                             image-fit: contain;
                         }
-                        AccessibleTap { width: parent.width; height: parent.height; label: "Info"; activated => { root.home-panel = 1; root.language-menu = false; root.last-copy-address = ""; root.info-copy-feedback = ""; } }
+                        info-trigger := AccessibleTap { width: parent.width; height: parent.height; refocus-request: root.return-info-focus; label: "Info"; activated => { root.home-panel = 1; root.language-menu = false; root.last-copy-address = ""; root.info-copy-feedback = ""; } }
                     }
 Rectangle {
                         width: 44px; height: 44px;
@@ -477,7 +518,7 @@ Rectangle {
                             width: 24px; height: 24px;
                             image-fit: contain;
                         }
-                        AccessibleTap { width: parent.width; height: parent.height; label: root.txt-settings; activated => { root.home-panel = root.home-panel == 2 ? 0 : 2; } }
+                        AccessibleTap { width: parent.width; height: parent.height; refocus-request: root.return-settings-focus; label: root.txt-settings; activated => { root.home-panel = root.home-panel == 2 ? 0 : 2; } }
                     }
                     }
                 }
@@ -604,7 +645,7 @@ Rectangle {
                     VerticalLayout { padding: 16px; spacing: 10px;
                         HorizontalLayout { spacing: 8px;
                             Text { text: root.txt-about-title; color: #f2f6ff; font-size: 23px; font-weight: 700; horizontal-stretch: 1; }
-                            Button { width: 90px; text: root.txt-close; clicked => { root.home-panel = 0; } }
+                            Button { width: 90px; text: root.txt-close; init => { self.focus(); } clicked => { root.home-panel = 0; info-trigger.focus(); } }
                         }
                         ScrollView { vertical-stretch: 1;
                             VerticalLayout { spacing: 13px;
@@ -957,23 +998,23 @@ Rectangle {
                         Text { text: root.txt-language; font-size: 16px; color: #142033; font-weight: 700; }
                         HorizontalLayout { height: 37px; spacing: 9px;
                             Image { source: @image-url("../assets/flags/en.svg"); width: 29px; height: 20px; image-fit: contain; }
-                            Button { text: "English"; clicked => { root.select-language("en"); root.language-menu = false; } }
+                            Button { text: "English"; init => { self.focus(); } clicked => { root.select-language("en"); root.language-menu = false; language-trigger.focus(); } }
                         }
                         HorizontalLayout { height: 37px; spacing: 9px;
                             Image { source: @image-url("../assets/flags/hr.svg"); width: 29px; height: 20px; image-fit: contain; }
-                            Button { text: "Hrvatski"; clicked => { root.select-language("hr"); root.language-menu = false; } }
+                            Button { text: "Hrvatski"; clicked => { root.select-language("hr"); root.language-menu = false; language-trigger.focus(); } }
                         }
                         HorizontalLayout { height: 37px; spacing: 9px;
                             Image { source: @image-url("../assets/flags/de.svg"); width: 29px; height: 20px; image-fit: contain; }
-                            Button { text: "Deutsch"; clicked => { root.select-language("de"); root.language-menu = false; } }
+                            Button { text: "Deutsch"; clicked => { root.select-language("de"); root.language-menu = false; language-trigger.focus(); } }
                         }
                         HorizontalLayout { height: 37px; spacing: 9px;
                             Image { source: @image-url("../assets/flags/it.svg"); width: 29px; height: 20px; image-fit: contain; }
-                            Button { text: "Italiano"; clicked => { root.select-language("it"); root.language-menu = false; } }
+                            Button { text: "Italiano"; clicked => { root.select-language("it"); root.language-menu = false; language-trigger.focus(); } }
                         }
                         HorizontalLayout { height: 37px; spacing: 9px;
                             Image { source: @image-url("../assets/flags/es.svg"); width: 29px; height: 20px; image-fit: contain; }
-                            Button { text: "Español"; clicked => { root.select-language("es"); root.language-menu = false; } }
+                            Button { text: "Español"; clicked => { root.select-language("es"); root.language-menu = false; language-trigger.focus(); } }
                         }
                     }
                 }
@@ -1170,6 +1211,13 @@ Rectangle {
                                     Rectangle { horizontal-stretch: 1; background: transparent; }
                                 }
                             }
+                            if root.installed-audio-enabled : HorizontalLayout {
+                                height: 36px; spacing: 8px;
+                                Text { width: 125px; color: root.tool-muted; text: root.txt-custom-audio; }
+                                Button { width: 128px; text: root.txt-choose-sound; clicked => { root.choose-alarm-audio(); } }
+                                Button { width: 130px; text: root.txt-reset-sound; clicked => { root.clear-alarm-audio(); } }
+                                Text { color: root.tool-muted; text: root.custom-alarm-label; horizontal-stretch: 1; }
+                            }
                             Text { text: root.txt-alarm-help;
                                    font-size: 13px; color: root.tool-muted; }
                             ScrollView {
@@ -1236,6 +1284,13 @@ Rectangle {
                                     released => { root.set-tool-scale(timer-size-slider.value); }
                                 }
                                 Rectangle { horizontal-stretch: 1; background: transparent; }
+                            }
+                            if root.installed-audio-enabled : HorizontalLayout {
+                                height: 36px; spacing: 8px;
+                                Text { width: 125px; color: root.tool-muted; text: root.txt-custom-audio; }
+                                Button { width: 128px; text: root.txt-choose-sound; clicked => { root.choose-timer-audio(); } }
+                                Button { width: 130px; text: root.txt-reset-sound; clicked => { root.clear-timer-audio(); } }
+                                Text { color: root.tool-muted; text: root.custom-timer-label; horizontal-stretch: 1; }
                             }
                             // Keep time controls at the top in fullscreen: the remaining free
                             // height belongs below the digits, not above the timer inputs.
@@ -1705,6 +1760,9 @@ fn sync_locale(ui: &DigitalClockUI, lang: &str) {
     ui.set_txt_hex_hint(i18n::tr(lang,"hex-hint").into());
     ui.set_txt_apply_hex(i18n::tr(lang,"apply-hex").into());
     ui.set_txt_alarm_help(i18n::tr(lang,"alarm-help").into());
+    ui.set_txt_custom_audio(i18n::tr(lang,"custom-audio").into());
+    ui.set_txt_choose_sound(i18n::tr(lang,"choose-sound").into());
+    ui.set_txt_reset_sound(i18n::tr(lang,"reset-sound").into());
     ui.set_txt_world_help(i18n::tr(lang,"world-help").into());
     ui.set_txt_clock_view(i18n::tr(lang,"clock-view").into());
     ui.set_txt_portable_hint(i18n::tr(lang,"portable-hint").into());
@@ -1824,19 +1882,19 @@ fn refresh_ui(ui: &DigitalClockUI, state: &mut RuntimeState) {
 
 /// Called only from the periodic 100 ms timer. All due events are dispatched
 /// in the same call-site that starts the sound, so UI refreshes cannot lose it.
-fn poll_alert_events(state: &mut RuntimeState) -> bool {
+fn poll_alert_events(state: &mut RuntimeState) -> Option<bool> {
     let now = Local::now();
-    let mut play_beep = false;
+    let mut channel = None;
     let due = state.alarms.due(now);
     if !due.is_empty() {
         state.alert = Some(format!("ALARM! {}", due.iter().map(|a| a.time.as_str()).collect::<Vec<_>>().join(", ")));
-        play_beep = true;
+        channel = Some(false);
     }
     if state.countdown.tick(Instant::now()) {
         state.alert = Some(i18n::tr(&state.stored.settings.language, "countdown-done").into());
-        play_beep = true;
+        channel = Some(true);
     }
-    play_beep
+    channel
 }
 
 fn persist(ui: &DigitalClockUI, state: &mut RuntimeState, path: &Path, may_save: bool) -> bool {
@@ -1889,18 +1947,41 @@ fn copy_to_clipboard(_value: &str) -> std::io::Result<()> {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let path = config::data_file()?;
-    // One writer per Portable Data path; unrelated copies remain independent.
+    #[cfg(all(windows, feature = "windows-installer"))]
+    let screensaver_mode = windows_screensaver::mode();
+    #[cfg(all(windows, feature = "windows-installer"))]
+    if let windows_screensaver::Mode::Preview(parent) = screensaver_mode {
+        return windows_screensaver::run_preview(parent);
+    }
     #[cfg(windows)]
-    let _single_instance_guard = match single_instance::InstanceGuard::acquire(&path)? {
-        Some(guard) => guard,
-        None => { single_instance::show_already_open_message(); return Ok(()); }
+    let is_saver_launch = {
+        #[cfg(feature = "windows-installer")]
+        { matches!(screensaver_mode, windows_screensaver::Mode::Screen) }
+        #[cfg(not(feature = "windows-installer"))]
+        { false }
     };
+    let path = config::data_file()?;
+
+// The screensaver renders without writing shared settings and must coexist
+    // with the running app. Normal application and /c remain single-instance.
+    #[cfg(windows)]
+    let _single_instance_guard = if is_saver_launch {
+        None
+    } else {
+        match single_instance::InstanceGuard::acquire(&path)? {
+            Some(guard) => Some(guard),
+            None => { single_instance::show_already_open_message(); return Ok(()); }
+        }
+    };
+
     let (stored, initial_status, may_save) = match config::load(&path) {
         Ok(stored) => (stored, "Digital Clock · Local data".to_string(), true),
         Err(error) => (P2State::default(), format!("{}: {error}",i18n::tr("en","json-warning")), false),
     };
+#[cfg(windows)]
+    let may_save = may_save && !is_saver_launch;
     let state = Rc::new(RefCell::new(RuntimeState::new(stored)?));
+
     let ui = DigitalClockUI::new()?;
     let hours: Vec<slint::SharedString> = (0..24).map(|n| format!("{n:02}").into()).collect();
     let minutes: Vec<slint::SharedString> = (0..60).map(|n| format!("{n:02}").into()).collect();
@@ -1939,6 +2020,24 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     sync_backups(&ui, &path);
 
     let audio = Rc::new(sound::SoundEngine::default());
+    #[cfg(all(windows, feature = "windows-installer"))]
+    ui.set_installed_audio_enabled(true);
+    #[cfg(all(windows, feature = "windows-installer"))]
+    let audio_path = path.with_file_name("windows-audio.json");
+    #[cfg(all(windows, feature = "windows-installer"))]
+    let audio_files = Rc::new(RefCell::new(match windows_custom_audio::load(&audio_path) {
+        Ok(prefs) => prefs,
+        Err(error) => {
+            ui.set_status_text(format!("Audio settings not loaded: {error}").into());
+            windows_custom_audio::CustomAudioPrefs::default()
+        }
+    }));
+    #[cfg(all(windows, feature = "windows-installer"))]
+    {
+        let saved = audio_files.borrow();
+        ui.set_custom_alarm_label(windows_custom_audio::label(&saved.alarm).into());
+        ui.set_custom_timer_label(windows_custom_audio::label(&saved.timer).into());
+    }
 
     macro_rules! bind_toggle {
         ($method:ident, $field:ident) => {{
@@ -2230,9 +2329,86 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     {
         let state = state.clone(); let audio = audio.clone();
+        #[cfg(all(windows, feature = "windows-installer"))]
+        let saved = audio_files.clone();
         ui.on_preview_alarm_tone(move || {
             let tone = state.borrow().stored.alarm_tone;
+            #[cfg(all(windows, feature = "windows-installer"))]
+            audio.preview_with_file(tone, saved.borrow().alarm.clone());
+            #[cfg(not(all(windows, feature = "windows-installer")))]
             audio.preview(tone);
+        });
+    }
+    #[cfg(all(windows, feature = "windows-installer"))]
+    {
+        let weak = ui.as_weak(); let paths = audio_files.clone(); let store = audio_path.clone();
+        ui.on_choose_alarm_audio(move || {
+            if let Some(ui) = weak.upgrade() {
+                match file_dialog::select_audio_file() {
+                    Ok(Some(chosen)) => match windows_custom_audio::validate_audio_file(&chosen) {
+                        Ok(path) => {
+                            let mut prefs = paths.borrow().clone();
+                            prefs.alarm = Some(path.to_string_lossy().into_owned());
+                            match windows_custom_audio::save(&store, &prefs) {
+                                Ok(()) => { ui.set_custom_alarm_label(windows_custom_audio::label(&prefs.alarm).into()); *paths.borrow_mut() = prefs; },
+                                Err(err) => ui.set_status_text(format!("Audio preferences: {err}").into()),
+                            }
+                        }
+                        Err(err) => ui.set_status_text(format!("Audio file: {err}").into()),
+                    },
+                    Ok(None) => {},
+                    Err(err) => ui.set_status_text(format!("Audio selection: {err}").into()),
+                }
+            }
+        });
+    }
+    #[cfg(all(windows, feature = "windows-installer"))]
+    {
+        let weak = ui.as_weak(); let paths = audio_files.clone(); let store = audio_path.clone();
+        ui.on_choose_timer_audio(move || {
+            if let Some(ui) = weak.upgrade() {
+                match file_dialog::select_audio_file() {
+                    Ok(Some(chosen)) => match windows_custom_audio::validate_audio_file(&chosen) {
+                        Ok(path) => {
+                            let mut prefs = paths.borrow().clone();
+                            prefs.timer = Some(path.to_string_lossy().into_owned());
+                            match windows_custom_audio::save(&store, &prefs) {
+                                Ok(()) => { ui.set_custom_timer_label(windows_custom_audio::label(&prefs.timer).into()); *paths.borrow_mut() = prefs; },
+                                Err(err) => ui.set_status_text(format!("Audio preferences: {err}").into()),
+                            }
+                        }
+                        Err(err) => ui.set_status_text(format!("Audio file: {err}").into()),
+                    },
+                    Ok(None) => {},
+                    Err(err) => ui.set_status_text(format!("Audio selection: {err}").into()),
+                }
+            }
+        });
+    }
+    #[cfg(all(windows, feature = "windows-installer"))]
+    {
+        let weak = ui.as_weak(); let paths = audio_files.clone(); let store = audio_path.clone();
+        ui.on_clear_alarm_audio(move || {
+            if let Some(ui) = weak.upgrade() {
+                let mut prefs = paths.borrow().clone(); prefs.alarm = None;
+                match windows_custom_audio::save(&store, &prefs) {
+                    Ok(()) => { ui.set_custom_alarm_label(windows_custom_audio::label(&prefs.alarm).into()); *paths.borrow_mut() = prefs; },
+                    Err(err) => ui.set_status_text(format!("Audio preferences: {err}").into()),
+                }
+            }
+        });
+    }
+    #[cfg(all(windows, feature = "windows-installer"))]
+    {
+        let weak = ui.as_weak(); let paths = audio_files.clone(); let store = audio_path.clone();
+        ui.on_clear_timer_audio(move || {
+            if let Some(ui) = weak.upgrade() {
+                let mut prefs = paths.borrow().clone(); prefs.timer = None;
+                match windows_custom_audio::save(&store, &prefs) {
+                    Ok(()) => { ui.set_custom_timer_label(windows_custom_audio::label(&prefs.timer).into()); *paths.borrow_mut() = prefs; },
+                    Err(err) => ui.set_status_text(format!("Audio preferences: {err}").into()),
+                }
+            }
         });
     }
     {
@@ -2592,6 +2768,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let weak = ui.as_weak();
     let ticking_state = state.clone();
     let ticking_audio = audio.clone();
+    #[cfg(all(windows, feature = "windows-installer"))]
+    let ticking_files = audio_files.clone();
     let timer = Timer::default();
     let saver_started = Instant::now();
     let mut last_saver_position_second = u64::MAX;
@@ -2607,13 +2785,85 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
             }
             let mut state = ticking_state.borrow_mut();
-            let play = poll_alert_events(&mut state);
+            let event = poll_alert_events(&mut state);
             refresh_ui(&ui, &mut state);
-            if play { ticking_audio.play_until_stopped(state.stored.alarm_tone); }
+            if let Some(is_timer) = event {
+                #[cfg(all(windows, feature = "windows-installer"))]
+                {
+                    let files = ticking_files.borrow();
+                    let filename = if is_timer { files.timer.clone() } else { files.alarm.clone() };
+                    ticking_audio.play_with_file(state.stored.alarm_tone, filename);
+                }
+                #[cfg(not(all(windows, feature = "windows-installer")))]
+                { let _ = is_timer; ticking_audio.play_until_stopped(state.stored.alarm_tone); }
+            }
         }
     });
+#[cfg(all(windows, feature = "windows-installer"))]
+    if matches!(screensaver_mode, windows_screensaver::Mode::Configure) {
+        ui.set_home_panel(2);
+    }
+    #[cfg(all(windows, feature = "windows-installer"))]
+    if matches!(screensaver_mode, windows_screensaver::Mode::Screen) {
+        ui.invoke_enter_display_mode(1);
+    }
+    // In .scr /s mode any real Windows input must close the whole process.
+    // Two-second grace avoids spurious startup input; never saves settings.
+    #[cfg(all(windows, feature = "windows-installer"))]
+    let _saver_exit_timer = if matches!(screensaver_mode, windows_screensaver::Mode::Screen) {
+        let weak_ui = ui.as_weak();
+        let start = Instant::now();
+        let baseline = Rc::new(RefCell::new(None::<u32>));
+        let timer = Timer::default();
+        timer.start(TimerMode::Repeated, Duration::from_millis(200), move || {
+            if start.elapsed() < Duration::from_secs(2) { return; }
+            if let Some(window) = weak_ui.upgrade() {
+                if window.get_display_mode() != 1 {
+                    let _ = slint::quit_event_loop();
+                    return;
+                }
+                if let Some(now) = windows_screensaver::last_input_tick() {
+                    let mut first = baseline.borrow_mut();
+                    match *first {
+                        Some(previous) if previous != now => {
+                            let _ = slint::quit_event_loop();
+                        }
+                        None => { *first = Some(now); }
+                        _ => {}
+                    }
+                }
+            }
+        });
+        Some(timer)
+    } else { None };
+    #[cfg(all(windows, feature = "windows-installer"))]
+    let result = if matches!(screensaver_mode, windows_screensaver::Mode::Normal) {
+        match windows_tray::Tray::start() {
+            Ok(_tray) => {
+                // Only normal Installed mode hides to tray. Screensaver modes do not.
+                ui.window().on_close_requested(|| slint::CloseRequestResponse::HideWindow);
+                let weak = ui.as_weak();
+                let tray_poll = Timer::default();
+                tray_poll.start(TimerMode::Repeated, Duration::from_millis(150), move || {
+                    match windows_tray::take_action() {
+                        1 => { if let Some(window) = weak.upgrade() { let _ = window.show(); } }
+                        2 => { let _ = slint::quit_event_loop(); }
+                        _ => {}
+                    }
+                });
+                ui.show()?;
+                let status = slint::run_event_loop_until_quit();
+                let _ = ui.hide();
+                drop(tray_poll);
+                status
+            }
+            Err(_) => ui.run(), // Safe fallback: never strand a hidden window.
+        }
+    } else { ui.run() };
+    #[cfg(not(all(windows, feature = "windows-installer")))]
     let result = ui.run();
     display::keep_display_awake(false);
+
     result?;
     Ok(())
 }

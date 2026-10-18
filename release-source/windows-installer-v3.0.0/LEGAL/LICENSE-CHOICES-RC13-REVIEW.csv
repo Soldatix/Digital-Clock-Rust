@@ -1,0 +1,241 @@
+package,version,declared_expression,candidate_choice,final_legal_verification
+accesskit,0.24.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+accesskit_consumer,0.38.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+accesskit_windows,0.34.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+accesskit_winit,0.33.2,Apache-2.0,Apache-2.0 - REVIEW,OPEN
+adler2,2.0.1,0BSD OR MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+allocator-api2,0.2.21,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+annotate-snippets,0.12.16,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+anstyle,1.0.14,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+arboard,3.6.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+arrayref,0.3.9,BSD-2-Clause,BSD-2-Clause - REVIEW,OPEN
+arrayvec,0.7.8,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+base64,0.23.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+bitflags,2.13.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+by_address,1.2.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+bytemuck,1.25.2,Zlib OR Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+bytemuck_derive,1.12.1,Zlib OR Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+byteorder-lite,0.1.0,Unlicense OR MIT,MIT PROPOSED - REVIEW,OPEN
+cfg-if,1.0.5,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+chrono,0.4.45,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+chrono-tz,0.10.4,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+clipboard-win,5.4.1,BSL-1.0,BSL-1.0 - REVIEW,OPEN
+clru,0.6.3,MIT,MIT - REVIEW,OPEN
+color_quant,1.1.0,MIT,MIT - REVIEW,OPEN
+const-field-offset,0.2.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+const-field-offset-macro,0.2.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+convert_case,0.10.0,MIT,MIT - REVIEW,OPEN
+countme,3.0.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+crc32fast,1.5.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+critical-section,1.2.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+crossbeam-channel,0.5.17,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+crossbeam-utils,0.8.23,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+cursor-icon,1.2.0,MIT OR Apache-2.0 OR Zlib,MIT PROPOSED - REVIEW,OPEN
+data-url,0.3.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+derive_more,2.1.1,MIT,MIT - REVIEW,OPEN
+derive_more-impl,2.1.1,MIT,MIT - REVIEW,OPEN
+displaydoc,0.2.7,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+dpi,0.1.2,Apache-2.0 AND MIT,BOTH BRANCHES - REVIEW,OPEN
+either,1.19.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+equivalent,1.0.3,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+error-code,3.4.0,BSL-1.0,BSL-1.0 - REVIEW,OPEN
+euclid,0.22.14,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+fdeflate,0.3.7,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+femtovg,0.27.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+field-offset,0.3.6,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+fixed_decimal,0.7.2,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+flate2,1.1.10,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+float-cmp,0.9.0,MIT,MIT - REVIEW,OPEN
+fnv,1.0.7,Apache-2.0 / MIT,Apache-2.0 / MIT - REVIEW,OPEN
+foldhash,0.2.0,Zlib,Zlib - REVIEW,OPEN
+font-types,0.12.6,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+fontdb,0.24.0,MIT,MIT - REVIEW,OPEN
+fontique,0.11.1,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+form_urlencoded,1.2.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+gif,0.14.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+glow,0.18.0,MIT OR Apache-2.0 OR Zlib,MIT PROPOSED - REVIEW,OPEN
+glutin,0.32.3,Apache-2.0,Apache-2.0 - REVIEW,OPEN
+glutin-winit,0.5.0,MIT,MIT - REVIEW,OPEN
+glutin_egl_sys,0.7.1,Apache-2.0,Apache-2.0 - REVIEW,OPEN
+glutin_wgl_sys,0.6.1,Apache-2.0,Apache-2.0 - REVIEW,OPEN
+harfrust,0.12.0,MIT,MIT - REVIEW,OPEN
+hashbrown,0.14.5,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+hashbrown,0.16.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+hashbrown,0.17.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+heck,0.5.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+htmlparser,0.2.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+i-slint-backend-selector,1.18.1,GPL-3.0-only OR LicenseRef-Slint-Royalty-free-2.0 OR LicenseRef-Slint-Software-3.0,PENDING CHOICE - REVIEW,OPEN
+i-slint-backend-winit,1.18.1,GPL-3.0-only OR LicenseRef-Slint-Royalty-free-2.0 OR LicenseRef-Slint-Software-3.0,PENDING CHOICE - REVIEW,OPEN
+i-slint-common,1.18.1,GPL-3.0-only OR LicenseRef-Slint-Royalty-free-2.0 OR LicenseRef-Slint-Software-3.0,PENDING CHOICE - REVIEW,OPEN
+i-slint-compiler,1.18.1,GPL-3.0-only OR LicenseRef-Slint-Royalty-free-2.0 OR LicenseRef-Slint-Software-3.0,PENDING CHOICE - REVIEW,OPEN
+i-slint-core,1.18.1,GPL-3.0-only OR LicenseRef-Slint-Royalty-free-2.0 OR LicenseRef-Slint-Software-3.0,PENDING CHOICE - REVIEW,OPEN
+i-slint-core-macros,1.18.1,GPL-3.0-only OR LicenseRef-Slint-Royalty-free-2.0 OR LicenseRef-Slint-Software-3.0,PENDING CHOICE - REVIEW,OPEN
+i-slint-renderer-femtovg,1.18.1,GPL-3.0-only OR LicenseRef-Slint-Royalty-free-2.0 OR LicenseRef-Slint-Software-3.0,PENDING CHOICE - REVIEW,OPEN
+icu_collections,2.3.0,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+icu_decimal,2.3.0,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+icu_decimal_data,2.3.0,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+icu_locale_core,2.3.0,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+icu_locale_fallback,2.3.0,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+icu_locale_fallback_data,2.3.0,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+icu_normalizer,2.3.0,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+icu_normalizer_data,2.3.0,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+icu_properties,2.3.0,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+icu_properties_data,2.3.0,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+icu_provider,2.3.1,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+icu_segmenter,2.3.0,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+icu_segmenter_data,2.3.0,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+idna,1.1.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+idna_adapter,1.2.2,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+image,0.25.10,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+image-webp,0.2.4,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+imagesize,0.15.0,MIT,MIT - REVIEW,OPEN
+imgref,1.12.3,CC0-1.0 OR Apache-2.0,PENDING CHOICE - REVIEW,OPEN
+indexmap,2.14.2,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+itertools,0.15.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+itoa,1.0.18,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+keyboard-types,0.7.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+kurbo,0.13.1,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+libloading,0.8.9,ISC,ISC - REVIEW,OPEN
+libm,0.2.16,MIT,MIT - REVIEW,OPEN
+linebender_resource_handle,0.1.1,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+litemap,0.8.3,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+log,0.4.34,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+lyon_algorithms,1.0.21,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+lyon_extra,1.1.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+lyon_geom,1.0.19,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+lyon_path,1.0.19,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+memchr,2.8.3,Unlicense OR MIT,MIT PROPOSED - REVIEW,OPEN
+memmap2,0.9.11,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+memoffset,0.9.1,MIT,MIT - REVIEW,OPEN
+miniz_oxide,0.8.9,MIT OR Zlib OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+miniz_oxide,0.9.1,MIT OR Zlib OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+moxcms,0.8.1,BSD-3-Clause OR Apache-2.0,PENDING CHOICE - REVIEW,OPEN
+muda,0.19.3,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+num-traits,0.2.19,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+num_enum,0.7.6,BSD-3-Clause OR MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+num_enum_derive,0.7.6,BSD-3-Clause OR MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+once_cell,1.21.4,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+parlance,0.1.1,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+parley,0.11.1,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+parley_data,0.11.1,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+percent-encoding,2.3.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+phf,0.12.1,MIT,MIT - REVIEW,OPEN
+phf_shared,0.12.1,MIT,MIT - REVIEW,OPEN
+pico-args,0.5.0,MIT,MIT - REVIEW,OPEN
+pin-project,1.1.13,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+pin-project-internal,1.1.13,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+pin-project-lite,0.2.17,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+pin-utils,0.1.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+pin-weak,1.1.0,MIT,MIT - REVIEW,OPEN
+png,0.18.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+polycool,0.4.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+portable-atomic,1.15.0,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+potential_utf,0.1.6,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+proc-macro-crate,3.5.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+proc-macro2,1.0.107,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+pulldown-cmark,0.13.4,MIT,MIT - REVIEW,OPEN
+pxfm,0.1.30,BSD-3-Clause OR Apache-2.0,PENDING CHOICE - REVIEW,OPEN
+quick-error,2.0.1,MIT/Apache-2.0,MIT/Apache-2.0 - REVIEW,OPEN
+quote,1.0.47,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+raw-window-handle,0.6.2,MIT OR Apache-2.0 OR Zlib,MIT PROPOSED - REVIEW,OPEN
+read-fonts,0.41.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+resvg,0.48.1,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+rgb,0.8.53,MIT,MIT - REVIEW,OPEN
+rowan,0.17.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+roxmltree,0.21.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+rustc-hash,1.1.0,Apache-2.0/MIT,Apache-2.0/MIT - REVIEW,OPEN
+rustversion,1.0.23,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+scoped-tls-hkt,0.1.5,MIT/Apache-2.0,MIT/Apache-2.0 - REVIEW,OPEN
+scopeguard,1.2.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+serde,1.0.229,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+serde_core,1.0.229,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+serde_derive,1.0.229,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+serde_json,1.0.154,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+simd-adler32,0.3.10,MIT,MIT - REVIEW,OPEN
+simplecss,0.2.2,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+siphasher,1.0.4,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+skrifa,0.44.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+slab,0.4.12,MIT,MIT - REVIEW,OPEN
+slint,1.18.1,GPL-3.0-only OR LicenseRef-Slint-Royalty-free-2.0 OR LicenseRef-Slint-Software-3.0,PENDING CHOICE - REVIEW,OPEN
+slint-macros,1.18.1,GPL-3.0-only OR LicenseRef-Slint-Royalty-free-2.0 OR LicenseRef-Slint-Software-3.0,PENDING CHOICE - REVIEW,OPEN
+slotmap,1.1.1,Zlib,Zlib - REVIEW,OPEN
+smallvec,1.16.3,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+smol_str,0.2.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+smol_str,0.3.6,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+spin_on,0.1.1,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+stable_deref_trait,1.2.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+static_assertions,1.1.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+strict-num,0.1.1,MIT,MIT - REVIEW,OPEN
+strum,0.28.0,MIT,MIT - REVIEW,OPEN
+strum_macros,0.28.0,MIT,MIT - REVIEW,OPEN
+svgtypes,0.16.1,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+swash,0.2.10,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+syn,2.0.119,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+syn,3.0.9,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+synstructure,0.14.0,MIT,MIT - REVIEW,OPEN
+sys-locale,0.3.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+taffy,0.10.1,MIT,MIT - REVIEW,OPEN
+text-size,1.1.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+thiserror,2.0.21,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+thiserror-impl,2.0.21,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+tiny-skia,0.12.0,BSD-3-Clause,BSD-3-Clause - REVIEW,OPEN
+tiny-skia-path,0.12.0,BSD-3-Clause,BSD-3-Clause - REVIEW,OPEN
+tinystr,0.8.4,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+tinyvec,1.13.3,Zlib OR Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+toml_datetime,1.1.2+spec-1.1.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+toml_edit,0.25.17+spec-1.1.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+toml_parser,1.1.5+spec-1.1.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+tracing,0.1.44,MIT,MIT - REVIEW,OPEN
+tracing-core,0.1.36,MIT,MIT - REVIEW,OPEN
+typed-index-collections,3.5.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+unicase,2.10.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+unicode-bidi,0.3.18,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+unicode-ident,1.0.27,(MIT OR Apache-2.0) AND Unicode-3.0,BOTH BRANCHES - REVIEW,OPEN
+unicode-linebreak,0.1.5,Apache-2.0,Apache-2.0 - REVIEW,OPEN
+unicode-script,0.5.8,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+unicode-segmentation,1.13.3,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+unicode-vo,0.1.0,MIT/Apache-2.0,MIT/Apache-2.0 - REVIEW,OPEN
+unicode-width,0.2.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+unicode-xid,0.2.6,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+url,2.5.8,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+usvg,0.48.1,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+utf8_iter,1.0.4,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+uuid,1.28.0,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+vtable,0.5.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+vtable-macro,0.5.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+webbrowser,1.2.4,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+weezl,0.1.12,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows,0.62.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-collections,0.3.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-core,0.62.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-future,0.3.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-implement,0.60.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-interface,0.59.3,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-link,0.2.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-numerics,0.3.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-result,0.4.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-strings,0.5.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-sys,0.52.0,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-sys,0.60.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-sys,0.61.2,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-targets,0.52.6,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-targets,0.53.5,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows-threading,0.2.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows_x86_64_msvc,0.52.6,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+windows_x86_64_msvc,0.53.1,MIT OR Apache-2.0,MIT PROPOSED - REVIEW,OPEN
+winit,0.30.13,Apache-2.0,Apache-2.0 - REVIEW,OPEN
+winnow,1.0.4,MIT,MIT - REVIEW,OPEN
+writeable,0.6.4,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+xmlwriter,0.1.0,MIT,MIT - REVIEW,OPEN
+yazi,0.2.1,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+yoke,0.8.3,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+yoke-derive,0.8.4,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+zeno,0.3.3,Apache-2.0 OR MIT,MIT PROPOSED - REVIEW,OPEN
+zerofrom,0.1.8,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+zerofrom-derive,0.1.8,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+zerotrie,0.2.5,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+zerovec,0.11.8,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+zerovec-derive,0.11.6,Unicode-3.0,Unicode-3.0 - REVIEW,OPEN
+zmij,1.0.23,MIT,MIT - REVIEW,OPEN
+zune-core,0.5.3,MIT OR Apache-2.0 OR Zlib,MIT PROPOSED - REVIEW,OPEN
+zune-jpeg,0.5.15,MIT OR Apache-2.0 OR Zlib,MIT PROPOSED - REVIEW,OPEN

@@ -26,3 +26,11 @@ Desktop.ini
 *.7z
 *.msix
 *.msixbundle
+
+# Generated Rust Installer preview outputs - never commit
+/packaging/preview-stage/
+/packaging/preview-output/
+/packaging/rc2-stage/
+/packaging/rc2-output/
+/packaging/rc3-stage/
+/packaging/rc3-output/

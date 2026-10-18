@@ -1,0 +1,46 @@
+DIGITAL CLOCK WINDOWS INSTALLER 3.0.0
+THIRD-PARTY LICENSE NOTICES - RC14 FIX2.2 MULTILANG
+
+Digital Clock uses third-party Rust libraries and fonts.
+The ORIGINAL third-party license files remain available unchanged in:
+  LEGAL/THIRD-PARTY-LICENSES/
+The original font licenses and notices are in:
+  LEGAL/Fonts/
+
+For the 240 normal Windows dependency packages, the publisher accepted the
+license choices documented in:
+  LEGAL/LICENSE-CHOICES-RC14-PUBLISHER-APPROVED.csv
+The original source files were SHA-256 inventoried in:
+  LEGAL/LICENSE-SOURCES-SHA256-RC14.csv
+
+LICENSE EXPRESSIONS:
+- The chosen MIT branch of an MIT OR Apache-2.0 package does not erase
+  copyright, preservation or attribution requirements.
+- Packages requiring license combinations marked AND retain all obligations.
+  Notably: dpi 0.1.2 (Apache-2.0 AND MIT) and unicode-ident 1.0.27
+  (MIT AND Unicode-3.0).
+- Five packages with slash-format MIT/Apache-2.0 metadata have publisher's MIT
+  choice documented, with both original license files preserved.
+- The four upstream generic MIT templates are NOT modified; supplementary
+  copyright attribution appears in LEGAL/MIT-COPYRIGHT-ATTRIBUTION-RC14.txt.
+
+SLINT:
+Slint UI toolkit 1.18.1 and its eight associated Slint crates are used
+under LicenseRef-Slint-Royalty-free-2.0, version 2.0 (the original upstream
+license text remains bundled). The license requires a readily discoverable
+Slint attribution badge on a public download page, OR a qualifying in-app
+AboutSlint widget/splash screen. Our attribution page is:
+  https://appsandgames.org/downloads/digital-clock/Installation.html
+Public wording must cover both Rust Windows Portable and Windows Installer
+before the Installer release is made public. Apps & Games PR #32 merged on
+2026-10-18; verify the live webpage displays the attribution before release.
+Slint and #MadeWithSlint are trademarks/branding of their respective owners.
+
+FONTS:
+Five font-license/notice documents were retained unmodified under
+LEGAL/Fonts/ (Digital Numbers, Orbitron, Roboto Mono, Segment7, and original
+font attribution). Follow the OFL and individual attribution notices.
+
+This notice documents the publisher's license selections and accompanying
+texts; it is not a legal opinion or warranty. No upstream source license is
+relicensed by this document.

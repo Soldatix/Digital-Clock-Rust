@@ -104,6 +104,20 @@ impl Default for P2State {
     }
 }
 
+#[cfg(feature = "windows-installer")]
+pub fn data_file() -> io::Result<PathBuf> {
+    // Deliberately separate from BOTH the original .NET installer profile and the
+    // Portable Data/ folder. No automatic migration or legacy profile mutation.
+    let local = std::env::var_os("LOCALAPPDATA")
+        .filter(|value| !value.is_empty())
+        .ok_or_else(|| io::Error::new(io::ErrorKind::NotFound, "LOCALAPPDATA is unavailable"))?;
+    Ok(PathBuf::from(local)
+        .join("AppsAndGames")
+        .join("DigitalClockRustInstallerPreview")
+        .join("app-state-native-p28.json"))
+}
+
+#[cfg(not(feature = "windows-installer"))]
 pub fn data_file() -> io::Result<PathBuf> {
     let exe = std::env::current_exe()?;
     let directory = exe.parent().ok_or_else(|| io::Error::new(io::ErrorKind::NotFound,

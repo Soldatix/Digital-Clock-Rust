@@ -1,0 +1,14 @@
+Bundled font notices
+
+Digital Numbers
+Copyright (c) 2015, Stephan Ahlf
+Source: https://github.com/s-a/digital-numbers-font
+License: SIL Open Font License 1.1
+
+Segment7
+Designer: Cedders
+Source copy: https://github.com/pwmarcz/autotable/blob/master/img/Segment7Standard.otf
+The source repository documents this font as licensed under the Open Font License.
+License: SIL Open Font License 1.1
+
+See OFL-1.1.txt in this directory.

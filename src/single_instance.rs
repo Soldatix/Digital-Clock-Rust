@@ -25,11 +25,16 @@ impl InstanceGuard {
         // Windows filenames are case-insensitive in the typical Portable setup.
         // Resolve the already-existing EXE folder, *not* the state file:
         // Data/app-state-native-p28.json might not exist on first launch.
-        let exe_folder = state_file.parent()
-            .and_then(|data_dir| data_dir.parent())
-            .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidInput, "Missing Portable application directory"))?
-            .canonicalize()?;
-        let canonical = exe_folder.to_string_lossy().to_lowercase();
+        #[cfg(not(feature = "windows-installer"))]
+        let canonical = {
+            let exe_folder = state_file.parent()
+                .and_then(|data_dir| data_dir.parent())
+                .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidInput, "Missing Portable application directory"))?
+                .canonicalize()?;
+            exe_folder.to_string_lossy().to_lowercase()
+        };
+        #[cfg(feature = "windows-installer")]
+        let canonical = state_file.to_string_lossy().replace('\\', "/").to_lowercase();
         // Stable FNV-1a (no randomized std::collections::hash_map::DefaultHasher).
         let mut hash = 0xcbf29ce484222325_u64;
         for byte in canonical.as_bytes() {
@@ -51,7 +56,12 @@ impl Drop for InstanceGuard {
 }
 
 pub fn show_already_open_message() {
-    let message: Vec<u16> = "Digital Clock is already open from this Portable folder.\0"
+    let message_text = if cfg!(feature = "windows-installer") {
+        "Digital Clock is already open.\0"
+    } else {
+        "Digital Clock is already open from this Portable folder.\0"
+    };
+    let message: Vec<u16> = message_text
         .encode_utf16().collect();
     let title: Vec<u16> = "Digital Clock\0".encode_utf16().collect();
     unsafe { MessageBoxW(ptr::null_mut(), message.as_ptr(), title.as_ptr(), 0x40); }

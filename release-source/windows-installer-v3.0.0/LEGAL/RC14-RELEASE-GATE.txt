@@ -1,0 +1,27 @@
+DIGITAL CLOCK RC14 FIX2.2 MULTILANG - RELEASE GATE
+
+ALREADY VERIFIED
+- Windows FIX2.2 installer compiled and successfully installed over 3.0.0.
+- New .scr displayed full screen and stayed selectable after choosing (None).
+- Language selection compiled and tested; English default.
+- Cargo normal Windows dependency graph: 240 entries, 0 missing from license inventory.
+- 422 original third-party license source files and 5 original font texts in supplied archive.
+- Publisher approved chosen license branches on 2026-10-18 (does not imply external legal review).
+
+STILL REQUIRED BEFORE PUBLIC RELEASE
+1) Run STAGE-APPROVED-LEGAL-AND-BUILD.ps1. Confirm ORIGINAL_LICENSE_SHA256=PASS,
+   FINAL_INNO_BUILD=PASS and its final SHA-256 report. This only updates legal
+   documentation and compiles Inno; it NEVER runs installers or publishes.
+2) PR #32 merged on 2026-10-18. Verify the public Apps & Games webpage
+   visibly covers BOTH Portable and Installer, with Slint image/link easy to find.
+3) On the actual final output installer, perform release package/installation
+   smoke validation for the embedded LEGAL files and registered saver. Keep
+   user data intact; do not remove the older Rust Bridge Pilot automatically.
+4) Publish a uniquely named final asset on GitHub Release and link to it from
+   Apps & Games. Do not change the download buttons to an unverified URL.
+
+CAUTION
+Publisher choice is recorded, but legal compliance for redistribution is
+not independently certified. The 8 additional build-only crates are outside
+our 240 normal Windows runtime package inventory; if build tools themselves
+are redistributed, revisit the scope.

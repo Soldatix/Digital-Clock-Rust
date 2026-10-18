@@ -1,0 +1,35 @@
+DIGITAL CLOCK 3.0.0 — RC14 FIX2.2 — INSTALLATION AND MIGRATION GUIDE
+READ BEFORE INSTALLING (English is the canonical migration instruction language)
+
+EXISTING RUST WINDOWS 3.0.0 INSTALLATION
+- Run this installer over the existing Rust Windows Digital Clock 3.0.0.
+- It uses the SAME installer AppId and supports an in-place update. Do not manually uninstall first.
+- Keep your existing backups. No automatic removal of user data is intended.
+
+OLD .NET DIGITAL CLOCK (IF INSTALLED)
+1. Export the old .NET application's JSON backup before attempting migration.
+2. Keep the backup OUTSIDE the application's folder. Separately preserve the old
+   WebView2 profile and any custom WAV/MP3 files.
+3. Rust and .NET use different installer AppIds. The .NET application is installed
+   side by side; its installation and data are not automatically removed.
+4. In Rust Settings, explicitly import the backup, then check alarms, profiles,
+   cities, themes, sounds, and tray. Unsupported custom audio, timer tones and
+   fonts may need manual handling. If import fails, preserve the original backup.
+5. Stop the old .NET autostart and application BEFORE enabling Rust autostart or
+   letting Rust take over active alarms. Roll back to .NET if necessary.
+
+OPTIONAL WINDOWS SCREEN SAVER INTEGRATION
+- The installer contains a per-user Digital Clock .scr and an OPTIONAL separately
+  installed System32 Screen Saver helper. Selecting the 'Keep Digital Clock in the
+  Windows Screen Saver list' task requests Administrator approval (UAC).
+- This registers AppsAndGames-DigitalClock-Windows.scr in the Windows Screen Saver
+  list. It does NOT change the active Screen Saver unless you separately select
+  'Activate Digital Clock Screen Saver after installation'.
+- Existing Screen Savers, including the older Rust Bridge Pilot, are not
+  automatically removed. Select the new Screen Saver in Windows settings if wanted.
+- The separate Screen Saver integration has its own uninstall entry. Uninstall
+  that component before uninstalling the main Digital Clock app; if the new
+  Screen Saver is active, first choose (None) or another Screen Saver in Windows.
+
+RELEASE NOTE: No automatic .NET-to-Rust migration or custom audio copying is
+implemented. This release does not imply changes to any public update manifest.

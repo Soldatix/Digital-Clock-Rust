@@ -1,0 +1,27 @@
+DC-RC14 LEGAL REVIEW - FIX2.2 + MULTILANG
+=========================================
+Verified in user-provided DC-RC14-LEGAL.zip:
+- 240 unique package/version entries; all currently OPEN (no legal auto-clearance).
+- 422 third-party source license files are present (not checked byte-for-byte
+  against the original RC13 source archive, which was not provided here).
+- Each listed package/version has at least one corresponding license document.
+- Five slash dual-license cases all have both MIT and Apache license texts;
+  MIT branch proposed but upstream choice must be accepted by publisher.
+- Four original MIT template files have unfilled copyright placeholders.
+- 9 Slint packages include royalty-free license text; Slint attribution
+  required either in application or on easily found download page.
+- 5 font license/notice documents present.
+- Current MIGRATION-READ-ME-FIRST.txt is OUTDATED: wrongly says System32
+  helper not included. Corrected English copy included in this bundle.
+
+Still NOT verified / release gates:
+A) Slint attribution is visible to users (in-app AboutSlint or public badge).
+B) Final dependency graph, license decisions and attribution reviewed for release.
+C) Installer compiled after replacing outdated migration and notice documents,
+   and final installable payload verified. Rebuilding Inno alone is sufficient;
+   Rust recompile is unnecessary if executable bits did not change.
+D) Do not remove the old Rust Bridge Pilot without a separate ownership-safe plan.
+
+A supplied script copies updated documentation to FIX2.2 stage, makes a backup,
+and compiles only the review installer using existing Inno Setup. It never runs
+an installer, uninstalls software, deletes data or publishes a release.
