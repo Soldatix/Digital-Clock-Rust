@@ -38,6 +38,12 @@ The stable v0.3.8 release promotes the functionally tested RC3.2 code without mo
 
 See [SOURCE-PROVENANCE.md](SOURCE-PROVENANCE.md) for checksums and the scope of this source snapshot.
 
+### Optional Apps & Games credit
+
+If you use our source code to create your own version, we'd appreciate a mention in its About / Info section:
+
+**Based on Digital Clock Windows Portable by Apps & Games — [appsandgames.org](https://appsandgames.org/)**
+
 ## Project
 
 [Apps & Games](https://appsandgames.org/) · Digital Clock Windows Portable · [Source repository](https://github.com/Soldatix/Digital-Clock-Rust)
